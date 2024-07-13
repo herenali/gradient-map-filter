@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import ImageUploader from './ImageUploader';
+import ChooseGradient from './ChooseGradient';
+import GradientProvider from './GradientProvider';
+import OpacityProvider from './OpacityProvider';
+import NewImageSrcProvider from './NewImageSrcProvider';
+import LoadingProvider from './LoadingProvider';
+import OpacityControl from './OpacityControl';
+import CustomGradient from './CustomGradient';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LoadingProvider>
+        <GradientProvider>
+          <OpacityProvider>
+            <NewImageSrcProvider>
+              <ChooseGradient />
+              <OpacityControl />
+              <CustomGradient />
+              <ImageUploader />
+            </NewImageSrcProvider>
+          </OpacityProvider>
+        </GradientProvider>
+      </LoadingProvider>
     </div>
   );
 }

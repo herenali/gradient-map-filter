@@ -1,0 +1,8 @@
+$loaderWidth: 50px;
+$centerPosition: calc(50% - $loaderWidth / 2);
+
+.Loading__display {
+  position: fixed;
+  left: $centerPosition;
+  top: $centerPosition;
+}

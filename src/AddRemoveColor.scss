@@ -1,0 +1,9 @@
+.AddRemoveColor__display {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  button, div {
+    margin: 5px;
+  }
+}

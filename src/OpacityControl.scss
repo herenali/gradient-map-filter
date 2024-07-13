@@ -1,0 +1,10 @@
+.OpacityControl__display {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  label, input {
+    margin: 5px;
+    margin-bottom: 0;
+  }
+}
