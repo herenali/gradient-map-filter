@@ -4,6 +4,7 @@ import OpacityContext from './OpacityContext';
 import NewImageSrcContext from './NewImageSrcContext';
 import gradientMapEffect from './gradientMap';
 import greyscaleDefaultImageSrc from './images/greyscale-jelena-mirkovic-ibiL1ypRmNI-unsplash.jpg';
+import './ImageUploader.scss';
 
 function ImageWithFilter(props) {
   const [firstRender, setFirstRender] = useState(true);

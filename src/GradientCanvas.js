@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import reactCSS from 'reactcss';
 
 function GradientCanvas(props) {
   const gradient = props.gradient;
@@ -16,9 +17,20 @@ function GradientCanvas(props) {
     ctx.fillRect(0, 0, props.width, props.height)
   }, [gradient, props.width, props.height])
 
+
+  const styles = reactCSS({
+    'default': {
+      canvas: {
+        width: `100%`,
+        height: `${props.height}px`,
+        maxWidth: `${props.width}px`,
+      },
+    },  
+  });
+
   return (
     <div className="App">
-      <canvas width={props.width} height={props.height} ref={canvasRef} {...props}/>
+      <canvas width={props.width} height={props.height} style={styles.canvas} ref={canvasRef} {...props}/>
     </div>
   );
 }
