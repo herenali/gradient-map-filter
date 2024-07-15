@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+# Customizable Gradient Map Filter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web app for applying gradient map filters to photos. Try the app for yourself [**here**](https://gradient-map.netlify.app/).
 
-## Available Scripts
+## Tutorial
 
-In the project directory, you can run:
+To upload your own image to apply a filter to, click on the "Choose file" button and pick an image.
 
-### `npm start`
+This web app includes 4 default gradients which can be freely customized. **Switch between these 4 gradients by clicking on the gradient swatches at the top of the screen. To change a color in the gradient, click on the color swatch above the gradient bar and choose a new color using the color picker**. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To add or remove a color from the gradient, click on the buttons "Add Color" or "Remove Color". Colors are added and removed starting from the rightmost color. Note that the minimum number of colors is 2.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+If the filter feels to vibrant or sharp, you can tone down the effect by reducing the opacity of the gradient map. You can do so by adjusting the opacity slider above the "Add Color" and "Remove Color" buttons. **I personally recommend lowering the opacity to around 0.3 for a more natural effect**.
 
-### `npm test`
+Once you're satisfied with the end result, click "Download Image" to download your new image!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Extra: What is a gradient map?
 
-### `npm run build`
+A gradient map is used to map the colors in an image to the colors of a given gradient according to their brightness. Taking a black to white gradient as an example, the darker parts of the image are mapped to dark grey and black, while the lighter parts of the image are mapped to light grey and white. This turns your image into a greyscale image!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Numerous digital art programs have this functionality, including Photoshop, Clip Studio Paint and Procreate. Gradient maps are great for changing the mood and atmosphere of a photo. You can also use gradient maps to create cool duotone effects!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you want to learn more about gradient maps, check out [this link](https://enviragallery.com/guide-to-gradient-maps-in-photoshop/).

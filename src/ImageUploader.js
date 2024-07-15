@@ -19,8 +19,8 @@ function ImageUploader() {
       </div>
 
       <div className="ImageDownloader__images">
-        <img src={file ? file : defaultImageSrc} width={500} alt="Regular version" />
         <ImageWithFilter newImageSrc={file ? file : defaultImageSrc} />
+        <img src={file ? file : defaultImageSrc} width={500} alt="Regular version" />
       </div>
     </div>
   );
