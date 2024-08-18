@@ -42,10 +42,23 @@ function ImageWithSvgFilter(props) {
   return (
 		<div className="ImageWithFilter__container">
 			<svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" class="Playground__svg" viewBox="0 0 1600 1600" height="75vh">
-				<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xlinkHref={props.newImageSrc}></image>
-				<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xlinkHref={props.newImageSrc} filter="url(#filter-0)"></image>
+				<defs>
+					<filter id="filter-0" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+						<feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" result="gray"></feColorMatrix>
+						<feComponentTransfer color-interpolation-filters="sRGB">
+							<feFuncR type="table" tableValues={red}></feFuncR>
+							<feFuncG type="table" tableValues={green}></feFuncG>
+							<feFuncB type="table" tableValues={blue}></feFuncB>
+							<feFuncA type="table" tableValues={alpha}></feFuncA>
+						</feComponentTransfer>
+					</filter>
+				</defs>
+				<g>
+					<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xlinkHref={props.newImageSrc}></image>
+					<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xlinkHref={props.newImageSrc} filter="url(#filter-0)"></image>
+				</g>
 			</svg>
-			<svg version="1.1" width="0" height="0">
+			{/* <svg version="1.1" width="0" height="0">
 				<filter id="filter-0">
 					<feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" result="gray"></feColorMatrix>
 					<feComponentTransfer color-interpolation-filters="sRGB">
@@ -55,7 +68,7 @@ function ImageWithSvgFilter(props) {
 						<feFuncA type="table" tableValues={alpha}></feFuncA>
 					</feComponentTransfer>
 				</filter>
-			</svg>
+			</svg> */}
 			{/* <img className="ImageWithFilter__originalImage" src={props.newImageSrc} width={500} alt="Filtered version" />
 			<img className="ImageWithFilter__newImage" src={props.newImageSrc} width={500} alt="Filtered version" data-gradientmap-filter="filter-0" style={{filter: 'url(#filter-0)'}} /> */}
 		</div>

@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ImageDownloader from "./ImageDownloader";
-import CssImageDownloader from "./CssImageDownloader";
 import ImageWithFilter from "./ImageWithFilter";
 import ImageWithSvgFilter from "./ImageWithSvgFilter";
 import defaultImageSrc from './images/jelena-mirkovic-ibiL1ypRmNI-unsplash.jpg';
+import NewImageSrcContext from "./NewImageSrcContext";
 import './ImageUploader.scss';
  
 function ImageUploader() {
   const [file, setFile] = useState();
+  const { newImageSrc, setNewImageSrc } = useContext(NewImageSrcContext);
+
   function handleChange(e) {
     console.log(e.target.files);
     setFile(URL.createObjectURL(e.target.files[0]));
+    setNewImageSrc(URL.createObjectURL(e.target.files[0]));
   }
+
  
   return (
     <div className="App">
       <div className="ImageDownloader__buttons">
         <input type="file" onChange={handleChange} />
-        {/* <CssImageDownloader /> */}
-        {/* <ImageDownloader /> */}
+        <ImageDownloader />
       </div>
 
       <div className="ImageDownloader__images">
