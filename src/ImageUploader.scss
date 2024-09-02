@@ -5,7 +5,14 @@
   justify-content: center;
 }
 
-img {
+@media (max-width: 500px) {
+  .ImageDownloader__images {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+img, image, .ImageWithFilter__container > svg {
   width: 100%;
   max-width: 500px;
 }

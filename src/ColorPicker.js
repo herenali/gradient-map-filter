@@ -69,7 +69,7 @@ function ColorPicker(props) {
     'default': {
       popover: {
         position: 'absolute',
-        left: '50%',
+        // left: '50%',
         zIndex: '2',
       },
       cover: {
