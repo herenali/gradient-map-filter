@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import reactCSS from 'reactcss';
-import GradientContext from './GradientContext';
+import GradientInfoContext from './GradientInfoContext';
 import { ChromePicker } from 'react-color';
 import './ColorPicker.scss';
 
 function ColorPicker(props) {
   const colorIndex = props.colorIndex;
 
-  const { gradient, setGradient } = useContext(GradientContext);
+  const { gradientInfo, setGradientInfo } = useContext(GradientInfoContext);
+  const gradient = gradientInfo.gradient;
+
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   const initialColor = props.initialColor;
@@ -61,7 +63,7 @@ function ColorPicker(props) {
         return colorData;
       }
     });
-    setGradient(newGradient);
+    setGradientInfo({ ...gradientInfo, gradient: newGradient });
     setLastColor({ ...color });
   };
 

@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import GradientContext from './GradientContext';
+import GradientInfoContext from './GradientInfoContext';
 import GradientCanvas from './GradientCanvas';
 import ColorPicker from './ColorPicker';
 import AddRemoveColor from './AddRemoveColor';
 import './CustomGradient.scss';
 
 function CustomGradient() {
-	const { gradient } = useContext(GradientContext);
+  const { gradientInfo } = useContext(GradientInfoContext);
+  const gradient = gradientInfo.gradient;
 
   return (
     <div className="App">

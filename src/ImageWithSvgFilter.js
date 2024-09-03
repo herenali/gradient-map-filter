@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import GradientContext from './GradientContext';
-import OpacityContext from './OpacityContext';
-import NewImageSrcContext from './NewImageSrcContext';
+import GradientInfoContext from './GradientInfoContext';
 import calcSVGComponentTransferFilter from './calcGradientMap';
 import './ImageUploader.scss';
 
@@ -11,9 +9,10 @@ function ImageWithSvgFilter(props) {
 	const [blue, setBlue] = useState("0 1");
 	const [alpha, setAlpha] = useState("0 1");
 
-  const { setNewImageSrc } = useContext(NewImageSrcContext);
-	const { gradient } = useContext(GradientContext);
-	const { opacity } = useContext(OpacityContext);
+	const { gradientInfo, setGradientInfo } = useContext(GradientInfoContext);
+	const gradient = gradientInfo.gradient;
+	const opacity = gradientInfo.opacity;
+	const blendMode = gradientInfo.blendMode;
 
 	useEffect(() => {
 		let strGradient = "black, white";
@@ -28,16 +27,15 @@ function ImageWithSvgFilter(props) {
 
 		strGradient = arrayGradient.toString();
 
-    const { redTableValues, greenTableValues, blueTableValues, alphaTableValues } = calcSVGComponentTransferFilter(strGradient, opacity);
+	const { redTableValues, greenTableValues, blueTableValues, alphaTableValues } = calcSVGComponentTransferFilter(strGradient, opacity);
 		setRed(redTableValues);
 		setGreen(greenTableValues);
 		setBlue(blueTableValues);
 		setAlpha(alphaTableValues);
 
 		const src = props.newImageSrc;
-
-		setNewImageSrc(src);
-	}, [gradient, opacity, setRed, setGreen, setBlue, setAlpha, setNewImageSrc, props.newImageSrc]);
+		setGradientInfo({ ...gradientInfo, newImageSrc: src });
+	}, [gradient, opacity, setRed, setGreen, setBlue, setAlpha, gradientInfo, setGradientInfo, props.newImageSrc]);
 
   return (
 		<div className="ImageWithFilter__container">
@@ -51,8 +49,7 @@ function ImageWithSvgFilter(props) {
 							<feFuncB type="table" tableValues={blue}></feFuncB>
 							<feFuncA type="table" tableValues={alpha}></feFuncA>
 						</feComponentTransfer>
-						<feBlend mode="normal" in="componentTransfer" in2="SourceGraphic" result="blend"/> 
-						{/* Change blend mode */}
+						<feBlend mode={blendMode} in="componentTransfer" in2="SourceGraphic" result="blend"/> 
 					</filter>
 				</defs>
 				<g>
