@@ -51,6 +51,8 @@ function ImageWithSvgFilter(props) {
 							<feFuncB type="table" tableValues={blue}></feFuncB>
 							<feFuncA type="table" tableValues={alpha}></feFuncA>
 						</feComponentTransfer>
+						<feBlend mode="normal" in="componentTransfer" in2="SourceGraphic" result="blend"/> 
+						{/* Change blend mode */}
 					</filter>
 				</defs>
 				<g>
