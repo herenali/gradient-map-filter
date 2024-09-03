@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import GradientContext from './GradientContext';
+import GradientInfoContext from './GradientInfoContext';
 import './AddRemoveColor.scss';
 
 function AddRemoveColor() {
-  const { gradient, setGradient } = useContext(GradientContext);
+  const { gradientInfo, setGradientInfo } = useContext(GradientInfoContext);
+  const gradient = gradientInfo.gradient;
 
   const addColor = () => {
     const currLength = gradient.length;
@@ -12,7 +13,7 @@ function AddRemoveColor() {
       return [step * i, colorData[1]];
     });
     newGradient.push([1, [255, 255, 255]]);
-    setGradient(newGradient);
+    setGradientInfo({ ...gradientInfo, gradient: newGradient });
   };
 
   const removeColor = () => {
@@ -23,7 +24,7 @@ function AddRemoveColor() {
         return [step * i, colorData[1]];
       });
       newGradient.pop();
-      setGradient(newGradient);
+      setGradientInfo({ ...gradientInfo, gradient: newGradient });
     }
   }
 

@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import OpacityContext from './OpacityContext';
+import GradientInfoContext from './GradientInfoContext';
 import './OpacityControl.scss';
 
 function OpacityControl() {
-  const { opacity, setOpacity } = useContext(OpacityContext);
+  const { gradientInfo, setGradientInfo } = useContext(GradientInfoContext);
+  const opacity = gradientInfo.opacity;
 
   function handleChange(e) {
-    setOpacity(e.target.value);
+    setGradientInfo({ ...gradientInfo, opacity: e.target.value });
   }
 
   return (

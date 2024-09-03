@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import reactCSS from 'reactcss';
-import GradientContext from './GradientContext';
+import GradientInfoContext from './GradientInfoContext';
 import gradients from './defaultGradients';
 import GradientCanvas from './GradientCanvas';
 import './ChooseGradient.scss';
 
 function ChooseGradient() {
-	const { setGradient } = useContext(GradientContext);
+  const { gradientInfo, setGradientInfo } = useContext(GradientInfoContext);
 
   const styles = reactCSS({
     'default': {
@@ -27,7 +27,7 @@ function ChooseGradient() {
     <div className="App">
       {gradients.map(gradient => {
         const setGradientOption = () => {
-          setGradient(gradient);
+          setGradientInfo({ ...gradientInfo, gradient: gradient });
         };
 
         return (<div style={styles.swatch} className="ChooseGradient__div" onClick={setGradientOption} key={gradient}>
