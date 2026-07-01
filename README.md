@@ -10,7 +10,7 @@ This web app includes 4 default gradients which can be freely customized. **Swit
 
 To add or remove a color from the gradient, click on the buttons "Add Color" or "Remove Color". Colors are added and removed starting from the rightmost color. Note that the minimum number of colors is 2.
 
-If the filter feels to vibrant or sharp, you can tone down the effect by reducing the opacity of the gradient map. You can do so by adjusting the opacity slider above the "Add Color" and "Remove Color" buttons. **I personally recommend lowering the opacity to around 0.3 for a more natural effect**.
+If the filter feels too vibrant or sharp, you can tone down the effect by reducing the opacity of the gradient map. You can do so by adjusting the opacity slider above the "Add Color" and "Remove Color" buttons. **I personally recommend lowering the opacity to around 0.3 for a more natural effect**.
 
 Once you're satisfied with the end result, click "Download Image" to download your new image!
 
