@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 
 import GradientInfoProvider from '../context/GradientInfoProvider';
 
-import ChooseGradient from '../components/ChooseGradient';
+import ChooseGradient from '../components/ChooseGradient.jsx';
 import ImageUploader from '../components/ImageUploader';
 import OpacityControl from '../components/OpacityControl';
 import CustomGradient from '../components/CustomGradient';

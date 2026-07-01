@@ -39,11 +39,11 @@ function ImageWithSvgFilter(props) {
 
   return (
 		<div className="ImageWithFilter__container">
-			<svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" class="Playground__svg" viewBox="0 0 1600 1600" height="75vh">
+			<svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className="Playground__svg" viewBox="0 0 1600 1600" height="75vh">
 				<defs>
-					<filter id="filter-0" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+					<filter id="filter-0" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
 						<feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" result="gray"></feColorMatrix>
-						<feComponentTransfer color-interpolation-filters="sRGB">
+						<feComponentTransfer colorInterpolationFilters="sRGB">
 							<feFuncR type="table" tableValues={red}></feFuncR>
 							<feFuncG type="table" tableValues={green}></feFuncG>
 							<feFuncB type="table" tableValues={blue}></feFuncB>

@@ -27,7 +27,7 @@ function ImageUploader() {
         <ImageWithSvgFilter newImageSrc={file ? file : defaultImageSrc} />
         
         <div className="ImageWithFilter__container">  
-          <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" class="Playground__svg" viewBox="0 0 1600 1600" height="75vh">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className="Playground__svg" viewBox="0 0 1600 1600" height="75vh">
             <image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xlinkHref={file ? file : defaultImageSrc}></image>
           </svg>
         </div>
