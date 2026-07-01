@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import GradientInfoContext from './GradientInfoContext';
-import calcSVGComponentTransferFilter from './calcGradientMap';
+import GradientInfoContext from '../context/GradientInfoContext';
+import calcSVGComponentTransferFilter from '../utils/calcGradientMap';
 import './ImageUploader.scss';
 
 function ImageWithSvgFilter(props) {

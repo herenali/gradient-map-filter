@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import GradientInfoContext from './GradientInfoContext';
+import GradientInfoContext from '../context/GradientInfoContext';
 import GradientCanvas from './GradientCanvas';
 import ColorPicker from './ColorPicker';
 import AddRemoveColor from './AddRemoveColor';

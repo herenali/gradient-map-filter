@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import ImageDownloader from "./ImageDownloader";
 import ImageWithSvgFilter from "./ImageWithSvgFilter";
-import defaultImageSrc from './images/jelena-mirkovic-ibiL1ypRmNI-unsplash.jpg';
-import GradientInfoContext from "./GradientInfoContext";
+import defaultImageSrc from '../assets/images/jelena-mirkovic-ibiL1ypRmNI-unsplash.jpg';
+import GradientInfoContext from "../context/GradientInfoContext";
 import './ImageUploader.scss';
  
 function ImageUploader() {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import reactCSS from 'reactcss';
-import GradientInfoContext from './GradientInfoContext';
+import GradientInfoContext from '../context/GradientInfoContext';
 import { ChromePicker } from 'react-color';
 import './ColorPicker.scss';
 

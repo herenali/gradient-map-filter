@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import reactCSS from 'reactcss';
-import GradientInfoContext from './GradientInfoContext';
-import gradients from './defaultGradients';
+import GradientInfoContext from '../context/GradientInfoContext';
+import gradients from '../constants/defaultGradients';
 import GradientCanvas from './GradientCanvas';
 import './ChooseGradient.scss';
 
