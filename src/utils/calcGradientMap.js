@@ -12,7 +12,6 @@ function calcStopsArray(stopsDecl) {
 
 	var matches = stopsDecl.match(/(((rgb|hsl)a?\(\d{1,3},\s*\d{1,3},\s*\d{1,3}(?:,\s*0?\.?\d+)?\)|\w+|#[0-9a-fA-F]{1,6})(\s+(0?\.\d+|\d{1,3}%))?)/g);
 
-	var stopsDeclArr = stopsDecl.split(',');
 	var stops = [];
 
 	matches.forEach(function(colorStop) {
@@ -63,38 +62,38 @@ function calcStopsArray(stopsDecl) {
 			}
 
 			// Find any runs of unpositioned stops and calculate them
-			var i = 1;
-			while (i < (stops.length-1)) {
-					if (!stops[i].pos) {
+			var stopIndex = 1;
+			while (stopIndex < (stops.length-1)) {
+					if (!stops[stopIndex].pos) {
 							// Find the next positioned stop.  You'll always have at least the
 							// last stop at 100.
-							for (var j = i+1; j < stops.length; j++) {
+							for (var j = stopIndex+1; j < stops.length; j++) {
 									if (stops[j].pos)
 											break;
 							}
 
-							var startPos = stops[i-1].pos;
+							var startPos = stops[stopIndex-1].pos;
 							var endPos = stops[j].pos;
 							var nStops = j - 1 + 1;
 
 							var delta = Math.round((endPos - startPos) / nStops);
-							while (i < j) {
-									stops[i].pos = stops[i-1].pos + delta;
-									i++;
+							while (stopIndex < j) {
+									stops[stopIndex].pos = stops[stopIndex-1].pos + delta;
+									stopIndex++;
 							}
 					}
 
-					i++;
+				stopIndex++;
 			}
 
-			if (stops[0].pos != 0) {
+			if (stops[0].pos !== 0) {
 					stops.unshift({
 							color: stops[0].color,
 							pos: 0
 					});
 			}
 
-			if (stops[stops.length-1].pos != 100) {
+			if (stops[stops.length-1].pos !== 100) {
 					stops.push({
 							color: stops[stops.length-1].color,
 							pos: 100
@@ -108,11 +107,11 @@ function calcStopsArray(stopsDecl) {
 function findMatchingDistributedNSegs(stops) {
 	var maxNumSegs = 100;
 	var matched = false;
-	for (var nSegs = 1; !matched && nSegs <= maxNumSegs; nSegs++) {
-			var segSize = maxNumSegs / nSegs;
+	for (var segmentCount = 1; !matched && segmentCount <= maxNumSegs; segmentCount++) {
+			var segSize = maxNumSegs / segmentCount;
 			matched = true;
-			for (var i = 1; i < stops.length-1; i++) {
-					var pos = stops[i].pos;
+				for (var stopIndex = 1; stopIndex < stops.length-1; stopIndex++) {
+						var pos = stops[stopIndex].pos;
 					if (pos < segSize) {
 							matched = false;
 							break;
@@ -126,35 +125,35 @@ function findMatchingDistributedNSegs(stops) {
 			}
 
 			if (matched)
-					return nSegs;
+						return segmentCount;
 	}
 
-	return nSegs;
+	return segmentCount;
 }
 
 function calcDistributedColors(stops, nSegs) {
 	var colors = [stops[0].color];
 
 	var segSize = 100 / nSegs;
-	for (var i = 1; i < stops.length-1; i++) {
-			var stop = stops[i];
+	for (var stopIndex = 1; stopIndex < stops.length-1; stopIndex++) {
+			var stop = stops[stopIndex];
 			var n = Math.round(stop.pos / segSize);
 			colors[n] = stop.color;
 	}
 
 	colors[nSegs] = stops[stops.length-1].color;
 
-	var i = 1;
-	while (i < colors.length) {
-			if (!colors[i]) {
-					for (var j = i+1; j < colors.length; j++) {
+	var colorIndex = 1;
+	while (colorIndex < colors.length) {
+			if (!colors[colorIndex]) {
+					for (var j = colorIndex+1; j < colors.length; j++) {
 							if (colors[j])
 									break;
 					}
 
-					// Need to evenly distribute colors stops from svgStop[i-1] to svgStop[j]
+					// Need to evenly distribute colors stops from svgStop[colorIndex-1] to svgStop[j]
 
-					var startColor = colors[i-1];
+						var startColor = colors[colorIndex-1];
 					var r = startColor[0];
 					var g = startColor[1];
 					var b = startColor[2];
@@ -162,22 +161,22 @@ function calcDistributedColors(stops, nSegs) {
 
 					var endColor = colors[j];
 
-					var nSegs = j - i + 1;
-					var dr = (endColor[0] - r) / nSegs;
-					var dg = (endColor[1] - g) / nSegs;
-					var db = (endColor[2] - b) / nSegs;
-					var da = (endColor[3] - a) / nSegs;
+					var distributedSegmentCount = j - colorIndex + 1;
+					var dr = (endColor[0] - r) / distributedSegmentCount;
+					var dg = (endColor[1] - g) / distributedSegmentCount;
+					var db = (endColor[2] - b) / distributedSegmentCount;
+					var da = (endColor[3] - a) / distributedSegmentCount;
 
-					while (i < j) {
+						while (colorIndex < j) {
 							r += dr;
 							g += dg;
 							b += db;
 							a += da;
-							colors[i] = [r, g, b, a];
-							i++;
+								colors[colorIndex] = [r, g, b, a];
+								colorIndex++;
 					}
 			}
-			i++;
+			colorIndex++;
 	}
 
 	return colors;
@@ -381,18 +380,18 @@ if (str in kCSSColorTable) return kCSSColorTable[str].slice();  // dup.
 // #abc and #abc123 syntax.
 if (str[0] === '#') {
 if (str.length === 4) {
-var iv = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
-if (!(iv >= 0 && iv <= 0xfff)) return null;  // Covers NaN.
-return [((iv & 0xf00) >> 4) | ((iv & 0xf00) >> 8),
-		(iv & 0xf0) | ((iv & 0xf0) >> 4),
-		(iv & 0xf) | ((iv & 0xf) << 4),
+	var iv4 = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
+	if (!(iv4 >= 0 && iv4 <= 0xfff)) return null;  // Covers NaN.
+	return [((iv4 & 0xf00) >> 4) | ((iv4 & 0xf00) >> 8),
+			(iv4 & 0xf0) | ((iv4 & 0xf0) >> 4),
+			(iv4 & 0xf) | ((iv4 & 0xf) << 4),
 		1];
 } else if (str.length === 7) {
-var iv = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
-if (!(iv >= 0 && iv <= 0xffffff)) return null;  // Covers NaN.
-return [(iv & 0xff0000) >> 16,
-		(iv & 0xff00) >> 8,
-		iv & 0xff,
+	var iv7 = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
+	if (!(iv7 >= 0 && iv7 <= 0xffffff)) return null;  // Covers NaN.
+	return [(iv7 & 0xff0000) >> 16,
+			(iv7 & 0xff00) >> 8,
+			iv7 & 0xff,
 		1];
 }
 
