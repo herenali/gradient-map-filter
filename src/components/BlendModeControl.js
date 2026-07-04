@@ -11,7 +11,7 @@ function BlendModeControl() {
 
   return (
     <div className="App BlendModeControl__display">
-      <label for="blendMode">Blend Mode</label>
+      <label htmlFor="blendMode">Blend Mode</label>
 			<select name="blendMode" id="blendMode" onChange={handleChange}>
 				<option value="normal">Normal</option>
 				<option value="multiply">Multiply</option>
