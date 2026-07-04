@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import GradientInfoContext from './GradientInfoContext';
-import { blackAndWhiteGradient } from './defaultGradients';
-import defaultImageSrc from './images/jelena-mirkovic-ibiL1ypRmNI-unsplash.jpg';
+import { blackAndWhiteGradient } from '../constants/defaultGradients';
+import defaultImageSrc from '../assets/images/jelena-mirkovic-ibiL1ypRmNI-unsplash.jpg';
  
 const GradientInfoProvider = ({ children }) => {
 	const [gradientInfo, setGradientInfo] = useState({

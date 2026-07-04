@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import GradientInfoContext from './GradientInfoContext';
+import GradientInfoContext from '../context/GradientInfoContext';
 import './OpacityControl.scss';
 
 function OpacityControl() {
