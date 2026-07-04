@@ -32,10 +32,7 @@ function ImageWithSvgFilter(props) {
 		setGreen(greenTableValues);
 		setBlue(blueTableValues);
 		setAlpha(alphaTableValues);
-
-		const src = props.newImageSrc;
-		setGradientInfo({ ...gradientInfo, newImageSrc: src });
-	}, [gradient, opacity, setRed, setGreen, setBlue, setAlpha, gradientInfo, setGradientInfo, props.newImageSrc]);
+	}, [gradient, opacity, props.newImageSrc]);
 
   return (
 		<div className="ImageWithFilter__container">
