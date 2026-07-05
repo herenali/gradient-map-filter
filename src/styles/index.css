@@ -119,7 +119,7 @@ nav > ul > li > a:hover {
 
 /* -------- Layout -------- */
 .panel-app {
-  max-width: 1080px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 32px 24px 64px;
   display: flex;
@@ -127,30 +127,51 @@ nav > ul > li > a:hover {
   gap: 20px;
 }
 
+/* Top region: large IMAGE area on the left, stacked controls on the right */
+.layout-top {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(300px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* Right-hand column stacks PRESETS, OPACITY, and BLEND MODE */
+.layout-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .layout-top {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 555px) {
   .panel-app {
     padding: 20px 16px 48px;
     gap: 16px;
   }
+  .layout-top,
+  .layout-controls {
+    gap: 16px;
+  }
 }
 
-/* Card wrapper for control sections.
-   The original markup gives every control block a ".App" class,
-   so we style those inside .panel-app as cards. */
-.panel-app > .App {
+/* Card styling for each control section. The markup gives every block an
+   ".App" class; we target the specific display classes so nested wrappers
+   (e.g. GradientCanvas) don't become cards. */
+.ImageUploader__display,
+.ChooseGradient__display,
+.OpacityControl__display,
+.BlendModeControl__display,
+.CustomGradient__display {
   background-color: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   padding: 20px;
-}
-
-/* Nested .App wrappers (e.g. GradientCanvas) should not become nested cards */
-.panel-app > .App .App {
-  background: none;
-  border: none;
-  box-shadow: none;
-  padding: 0;
 }
 
 /* -------- Form controls (shared) -------- */
