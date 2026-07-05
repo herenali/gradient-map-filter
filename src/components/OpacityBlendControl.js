@@ -5,7 +5,6 @@ import './OpacityBlendControl.scss';
 function OpacityBlendControl() {
   const { gradientInfo, setGradientInfo } = useContext(GradientInfoContext);
   const opacity = gradientInfo.opacity;
-  const blendMode = gradientInfo.blendMode;
 
   function handleOpacityChange(e) {
     setGradientInfo({ ...gradientInfo, opacity: e.target.value });
