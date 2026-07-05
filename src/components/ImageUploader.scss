@@ -1,15 +1,47 @@
-// .ImageDownloader__buttons {
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 0.75rem;
-//   align-items: center;
-// }
+.ImageDownloader__buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
 
 .ImageDownloader__images {
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 20px;
+}
+
+.ImageWithFilter__container {
+  background-color: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+  overflow: hidden;
+  line-height: 0;
+  flex: 1;
+  min-width: 280px;
+  max-width: 500px;
+}
+
+.ImageWithFilter__container > svg,
+.ImageWithFilter__container img,
+.ImageWithFilter__container image {
+  border-radius: 8px;
+}
+
+/* The SVG has an inline height of 75vh; override so it scales with width
+   using its square viewBox instead of leaving large empty space. */
+.ImageWithFilter__container > svg {
+  height: auto !important;
+  aspect-ratio: 1 / 1;
+  display: block;
 }
 
 @media (max-width: 500px) {
@@ -19,7 +51,9 @@
   }
 }
 
-img, image, .ImageWithFilter__container > svg {
+img,
+image,
+.ImageWithFilter__container > svg {
   width: 100%;
   max-width: 500px;
 }

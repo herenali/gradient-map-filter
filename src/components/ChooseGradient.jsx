@@ -4,37 +4,30 @@ import gradients from '../constants/defaultGradients';
 import GradientCanvas from './GradientCanvas';
 import './ChooseGradient.scss';
 
-const swatchStyle = {
-  padding: '5px',
-  paddingBottom: '3px',
-  background: '#eee',
-  borderRadius: '1px',
-  boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-  display: 'inline-block',
-  cursor: 'pointer',
-};
-
 function ChooseGradient() {
   const { gradientInfo, setGradientInfo } = useContext(GradientInfoContext);
 
   return (
-    <div className="App">
-      {gradients.map((gradient, index) => {
-        const setGradientOption = () => {
-          setGradientInfo({ ...gradientInfo, gradient });
-        };
+    <div className="App ChooseGradient__display">
+      <h2 className="section-title">Preset Gradients</h2>
+      <div className="ChooseGradient__grid">
+        {gradients.map((gradient, index) => {
+          const setGradientOption = () => {
+            setGradientInfo({ ...gradientInfo, gradient });
+          };
 
-        return (
-          <div
-            style={swatchStyle}
-            className="ChooseGradient__div"
-            onClick={setGradientOption}
-            key={index}
-          >
-            <GradientCanvas gradient={gradient} width={250} height={25} />
-          </div>
-        );
-      })}
+          return (
+            <button
+              type="button"
+              className="ChooseGradient__swatch"
+              onClick={setGradientOption}
+              key={index}
+            >
+              <GradientCanvas gradient={gradient} width={250} height={25} />
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

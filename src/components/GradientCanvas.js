@@ -29,7 +29,7 @@ function GradientCanvas(props) {
   });
 
   return (
-    <div className="App">
+    <div className="App" style={{ height: `${props.height}px` }}>
       <canvas width={props.width} height={props.height} style={styles.canvas} ref={canvasRef} {...props}/>
     </div>
   );

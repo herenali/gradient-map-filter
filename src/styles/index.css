@@ -1,8 +1,44 @@
+:root {
+  /* Neutrals */
+  --background: #f5f6f9;
+  --surface: #ffffff;
+  --surface-muted: #f0f2f7;
+  --border: #e4e7ee;
+  --border-strong: #d5d9e3;
+
+  /* Text */
+  --foreground: #1a1c22;
+  --muted-foreground: #5c6270;
+
+  /* Brand accent */
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-foreground: #ffffff;
+  --primary-soft: #eef0ff;
+
+  /* Radius + shadow */
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 1px 2px rgba(20, 24, 40, 0.05);
+  --shadow-md: 0 4px 16px rgba(20, 24, 40, 0.06);
+  --shadow-lg: 0 12px 32px rgba(20, 24, 40, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--background);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Helvetica Neue', sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -12,80 +48,225 @@ code {
     monospace;
 }
 
+/* -------- Navbar -------- */
 nav {
   box-sizing: border-box;
   width: 100%;
-  height: 70px;
-  padding: 20px 40px;
-  /* margin-bottom: 1rem; */
+  height: 68px;
+  padding: 0 24px;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
 
   position: sticky;
   top: 0;
-  background-color: rgba(255, 255, 255, 0.95);
-
-  border-style: solid;
-  border-width: 0 0 1px 0;
-  border-color: #eee;
-
-  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
 }
 
-@media (max-width: 555px) {
-  nav {
-    height: 100px;
-    flex-wrap: wrap;
-  }
+nav > svg {
+  color: var(--primary);
+  flex-shrink: 0;
 }
 
 nav > span {
-  font-size: 1.375rem;
-  font-weight: bold;
-  margin-left: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   margin-right: auto;
+  color: var(--foreground);
 }
 
 nav > ul {
   display: flex;
   list-style: none;
   flex-direction: row;
-}
-
-nav > ul > li {
-  margin-left: 0.5rem;
-}
-
-nav > ul > li > a {
-  font-size: 1.1rem;
-  color: black;
-  text-decoration: none;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-nav > ul > li > a:hover {
-  color: rgb(12, 65, 134);
-}
-
-.panel-app {
-  padding: 1rem;
-}
-
-/* .ImageWithFilter__container {
+  align-items: center;
+  gap: 4px;
+  margin: 0;
   padding: 0;
 }
 
-.ImageWithFilter__newImage {
-  position: relative;
-  top: 0;
-  left: 0;
+nav > ul > li > a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-.ImageWithFilter__originalImage {
-  position: relative;
-  top: 0;
-  left: 0;
-} */
+nav > ul > li > a:hover {
+  color: var(--foreground);
+  background-color: var(--surface-muted);
+}
+
+@media (max-width: 555px) {
+  nav {
+    height: auto;
+    padding: 14px 16px;
+    flex-wrap: wrap;
+  }
+  nav > span {
+    font-size: 1rem;
+  }
+}
+
+/* -------- Layout -------- */
+.panel-app {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 555px) {
+  .panel-app {
+    padding: 20px 16px 48px;
+    gap: 16px;
+  }
+}
+
+/* Card wrapper for control sections.
+   The original markup gives every control block a ".App" class,
+   so we style those inside .panel-app as cards. */
+.panel-app > .App {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+}
+
+/* Nested .App wrappers (e.g. GradientCanvas) should not become nested cards */
+.panel-app > .App .App {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* -------- Form controls (shared) -------- */
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+button {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-foreground);
+  background-color: var(--primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+select,
+input[type='number'] {
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--foreground);
+  background-color: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+select:focus,
+input[type='number']:focus,
+input[type='range']:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+input[type='number'] {
+  width: 80px;
+}
+
+/* Range slider */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--border-strong);
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 3px solid var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--surface);
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* File input */
+input[type='file'] {
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+}
+
+input[type='file']::file-selector-button {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--foreground);
+  background-color: var(--surface-muted);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 9px 16px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+input[type='file']::file-selector-button:hover {
+  background-color: var(--border);
+}
+
+/* Section heading helper */
+.section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  margin: 0 0 16px;
+  text-align: left;
+}

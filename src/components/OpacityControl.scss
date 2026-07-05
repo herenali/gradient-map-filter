@@ -2,9 +2,24 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  label, input {
-    margin: 5px;
-    margin-bottom: 0;
+  align-items: center;
+  gap: 16px;
+
+  label {
+    margin: 0;
+  }
+
+  .OpacityControl__inputs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    flex: 1;
+    min-width: 220px;
+  }
+
+  input[type='range'] {
+    flex: 1;
+    min-width: 160px;
   }
 }

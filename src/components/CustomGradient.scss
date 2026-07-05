@@ -1,9 +1,21 @@
 .CustomGradient__colorPickers {
   width: 100%;
   max-width: 500px;
-  margin: auto;
+  margin: 16px auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 12px;
+}
+
+.CustomGradient__preview {
+  display: flex;
+  justify-content: center;
+}
+
+.CustomGradient__preview canvas {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
 }
