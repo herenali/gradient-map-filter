@@ -10,12 +10,46 @@
   border-bottom: 1px solid var(--border);
 }
 
+.ImageUploader__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+
+  .icon-button {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      background: var(--surface-hover);
+      border-color: var(--primary);
+    }
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
 .ImageDownloader__images {
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+}
+
+.ImageDownloader__images--single {
+  justify-content: center;
 }
 
 .ImageWithFilter__container {
@@ -48,6 +82,15 @@
   .ImageDownloader__images {
     width: 100%;
     max-width: 500px;
+  }
+
+  .ImageUploader__actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .ImageUploader__actions > button {
+    flex: 1 1 140px;
   }
 }
 
