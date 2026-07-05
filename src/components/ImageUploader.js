@@ -3,6 +3,7 @@ import ImageWithSvgFilter from "./ImageWithSvgFilter";
 import defaultImageSrc from '../assets/images/jelena-mirkovic-ibiL1ypRmNI-unsplash.jpg';
 import GradientInfoContext from "../context/GradientInfoContext";
 import calcSVGComponentTransferFilter from '../utils/calcGradientMap';
+import { saveImageToDB, loadImageFromDB } from '../utils/indexedDB';
 import './ImageUploader.scss';
 import eyeIcon from '../assets/icons/eye.svg';
 import eyeCrossedIcon from '../assets/icons/eye-crossed.svg';
@@ -32,17 +33,36 @@ function ImageUploader() {
     }
   }, [displayMode]);
 
-  function handleChange(e) {
+  useEffect(() => {
+    async function loadImage() {
+      const savedImage = await loadImageFromDB();
+      if (savedImage) {
+        setFile(savedImage);
+        setGradientInfo(prev => ({ ...prev, newImageSrc: savedImage }));
+      }
+    }
+    loadImage();
+  }, [setGradientInfo]);
+
+  async function handleChange(e) {
     const selectedFile = e.target.files && e.target.files[0];
 
     if (!selectedFile) {
       return;
     }
 
-    const nextImageSrc = URL.createObjectURL(selectedFile);
-
-    setFile(nextImageSrc);
-    setGradientInfo({ ...gradientInfo, newImageSrc: nextImageSrc });
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const dataUrl = reader.result;
+      try {
+        await saveImageToDB(dataUrl);
+      } catch (error) {
+        console.error('Failed to save image to IndexedDB:', error);
+      }
+      setFile(dataUrl);
+      setGradientInfo({ ...gradientInfo, newImageSrc: dataUrl });
+    };
+    reader.readAsDataURL(selectedFile);
   }
 
   function toggleDisplayMode() {
