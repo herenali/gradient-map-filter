@@ -81,7 +81,8 @@ function ImageUploader() {
 
  
   return (
-    <div className="App">
+    <div className="App ImageUploader__display">
+      <h2 className="section-title">Image</h2>
       <div className="ImageDownloader__buttons">
         <input type="file" onChange={handleChange} />
         <button type="button" onClick={downloadSvg}>Download SVG</button>

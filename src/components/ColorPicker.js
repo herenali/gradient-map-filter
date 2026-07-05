@@ -67,12 +67,20 @@ function ColorPicker(props) {
     setLastColor({ ...color });
   };
 
+  const handleTouchMove = (e) => {
+    e.preventDefault();
+  };
+
   const styles = reactCSS({
     'default': {
       popover: {
         position: 'absolute',
         // left: '50%',
         zIndex: '2',
+        // Prevent scroll chaining on mobile
+        overflowY: 'auto',
+        overscrollBehavior: 'contain',
+        webkitOverflowScrolling: 'touch',
       },
       cover: {
         position: 'fixed',
@@ -105,7 +113,7 @@ function ColorPicker(props) {
       </div>
       {displayColorPicker ? (
         <div style={styles.popover}>
-          <div style={styles.cover} onClick={closeColorPicker}/>
+          <div style={styles.cover} onClick={closeColorPicker} onTouchMove={handleTouchMove}/>
           <ChromePicker color={color} onChange={changeColor} disableAlpha={true} />
         </div>
       ) : null}

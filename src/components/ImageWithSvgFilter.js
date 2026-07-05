@@ -9,7 +9,7 @@ function ImageWithSvgFilter(props) {
 	const [blue, setBlue] = useState("0 1");
 	const [alpha, setAlpha] = useState("0 1");
 
-	const { gradientInfo, setGradientInfo } = useContext(GradientInfoContext);
+	const { gradientInfo } = useContext(GradientInfoContext);
 	const gradient = gradientInfo.gradient;
 	const opacity = gradientInfo.opacity;
 	const blendMode = gradientInfo.blendMode;
