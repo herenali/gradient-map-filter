@@ -49,10 +49,15 @@ function ImageWithSvgFilter(props) {
 						<feBlend mode={blendMode} in="componentTransfer" in2="SourceGraphic" result="blend"/> 
 					</filter>
 				</defs>
-				<g>
-					<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xlinkHref={props.newImageSrc}></image>
-					<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xlinkHref={props.newImageSrc} filter="url(#filter-0)"></image>
-				</g>
+				<image
+					x="0%"
+					y="0%"
+					width="100%"
+					height="100%"
+					preserveAspectRatio="xMidYMid meet"
+					xlinkHref={props.newImageSrc}
+					filter={props.showFilter === false ? undefined : "url(#filter-0)"}
+				/>
 			</svg>
 			{/* <svg version="1.1" width="0" height="0">
 				<filter id="filter-0">
