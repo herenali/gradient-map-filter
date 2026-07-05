@@ -10,7 +10,9 @@ function CustomGradient() {
   const gradient = gradientInfo.gradient;
 
   return (
-    <div className="App">
+    <div className="App CustomGradient__display">
+      <h2 className="section-title">Custom Gradient</h2>
+
       <AddRemoveColor />
 
       <div className='CustomGradient__colorPickers'>
@@ -21,7 +23,9 @@ function CustomGradient() {
         })}
       </div>
 
-      <GradientCanvas gradient={gradient} width={500} height={50} />
+      <div className="CustomGradient__preview">
+        <GradientCanvas gradient={gradient} width={500} height={50} />
+      </div>
     </div>
   );
 }

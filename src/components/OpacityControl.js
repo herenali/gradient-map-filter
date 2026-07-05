@@ -13,23 +13,25 @@ function OpacityControl() {
   return (
     <div className="App OpacityControl__display">
       <label htmlFor="opacitySlider">Opacity</label>
-      <input 
-        id="opacitySlider"
-        value={opacity}
-        type="range"
-        min="0" 
-        max="1" 
-        step=".1" 
-        onChange={handleChange} 
-      />
-      <input 
-        value={opacity} 
-        type="number" 
-        min="0" 
-        max="1" 
-        step=".1"
-        onChange={handleChange} 
-      />
+      <div className="OpacityControl__inputs">
+        <input
+          id="opacitySlider"
+          value={opacity}
+          type="range"
+          min="0"
+          max="1"
+          step=".1"
+          onChange={handleChange}
+        />
+        <input
+          value={opacity}
+          type="number"
+          min="0"
+          max="1"
+          step=".1"
+          onChange={handleChange}
+        />
+      </div>
     </div>
   );
 }
