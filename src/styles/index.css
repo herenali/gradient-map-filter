@@ -1,27 +1,31 @@
 :root {
   /* Neutrals */
-  --background: #f5f6f9;
+  --background: #f8f8f3;
   --surface: #ffffff;
-  --surface-muted: #f0f2f7;
-  --border: #e4e7ee;
-  --border-strong: #d5d9e3;
+  --surface-muted: #f2f3eb;
+  --border: #e0e4d7;
+  --border-strong: #cfd6c1;
 
   /* Text */
-  --foreground: #1a1c22;
-  --muted-foreground: #5c6270;
+  --foreground: #31372f;
+  --muted-foreground: #6b7268;
 
-  /* Brand accent */
-  --primary: #4f46e5;
-  --primary-hover: #4338ca;
+  /* Brand */
+  --primary: #9ab987;
+  --primary-hover: #86a873;
   --primary-foreground: #ffffff;
-  --primary-soft: #eef0ff;
+  --primary-soft: #eef5ea;
 
-  /* Radius + shadow */
+  /* Secondary Accent */
+  --accent: #f2dda0;
+  --accent-soft: #fbf5df;
+
+  /* Radius + Shadow */
   --radius: 14px;
   --radius-sm: 10px;
-  --shadow-sm: 0 1px 2px rgba(20, 24, 40, 0.05);
-  --shadow-md: 0 4px 16px rgba(20, 24, 40, 0.06);
-  --shadow-lg: 0 12px 32px rgba(20, 24, 40, 0.1);
+  --shadow-sm: 0 1px 2px rgba(45,55,45,0.05);
+  --shadow-md: 0 4px 16px rgba(45,55,45,0.07);
+  --shadow-lg: 0 12px 32px rgba(45,55,45,0.10);
 }
 
 * {
@@ -119,7 +123,7 @@ nav > ul > li > a:hover {
 
 /* -------- Layout -------- */
 .panel-app {
-  max-width: 1080px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 32px 24px 64px;
   display: flex;
@@ -127,30 +131,51 @@ nav > ul > li > a:hover {
   gap: 20px;
 }
 
+/* Top region: large IMAGE area on the left, stacked controls on the right */
+.layout-top {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(300px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* Right-hand column stacks PRESETS, OPACITY, and BLEND MODE */
+.layout-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .layout-top {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 555px) {
   .panel-app {
     padding: 20px 16px 48px;
     gap: 16px;
   }
+  .layout-top,
+  .layout-controls {
+    gap: 16px;
+  }
 }
 
-/* Card wrapper for control sections.
-   The original markup gives every control block a ".App" class,
-   so we style those inside .panel-app as cards. */
-.panel-app > .App {
+/* Card styling for each control section. The markup gives every block an
+   ".App" class; we target the specific display classes so nested wrappers
+   (e.g. GradientCanvas) don't become cards. */
+.ImageUploader__display,
+.ChooseGradient__display,
+.OpacityControl__display,
+.BlendModeControl__display,
+.CustomGradient__display {
   background-color: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   padding: 20px;
-}
-
-/* Nested .App wrappers (e.g. GradientCanvas) should not become nested cards */
-.panel-app > .App .App {
-  background: none;
-  border: none;
-  box-shadow: none;
-  padding: 0;
 }
 
 /* -------- Form controls (shared) -------- */

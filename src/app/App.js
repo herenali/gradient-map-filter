@@ -17,11 +17,17 @@ function App() {
       <Navbar />
       <section className="panel-app">
           <GradientInfoProvider>
-            <ChooseGradient />
-            <OpacityControl />
-            <BlendModeControl />
+            <div className="layout-top">
+              <div className="layout-image">
+                <ImageUploader />
+              </div>
+              <div className="layout-controls">
+                <ChooseGradient />
+                <OpacityControl />
+                <BlendModeControl />
+              </div>
+            </div>
             <CustomGradient />
-            <ImageUploader />
           </GradientInfoProvider>
       </section>
     </div>

@@ -23,7 +23,7 @@ function ChooseGradient() {
               onClick={setGradientOption}
               key={index}
             >
-              <GradientCanvas gradient={gradient} width={250} height={25} />
+              <GradientCanvas gradient={gradient} width={500} height={25} />
             </button>
           );
         })}
