@@ -40,6 +40,71 @@
   }
 }
 
+.ImageUploader__download {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.ImageUploader__download-main,
+.ImageUploader__download-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ImageUploader__download-main {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  border-right: 1px solid var(--border);
+  padding-right: 14px;
+}
+
+.ImageUploader__download-arrow {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  min-width: 40px;
+  padding-left: 14px;
+}
+
+.ImageUploader__download-main:hover,
+.ImageUploader__download-arrow:hover,
+.ImageUploader__download-main:focus-visible,
+.ImageUploader__download-arrow:focus-visible {
+  z-index: 1;
+}
+
+.ImageUploader__download-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 5;
+  min-width: 100%;
+  // padding: 6px;
+  padding: 4px;
+  display: grid;
+  gap: 4px;
+  background: var(--surface);
+  // background: var(--primary);
+  // border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.ImageUploader__download-menu button {
+  width: 100%;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: calc(var(--radius-sm) - 2px);
+  background: transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  text-align: left;
+}
+
+.ImageUploader__download-menu button:hover,
+.ImageUploader__download-menu button:focus-visible {
+  background: var(--surface-muted);
+}
+
 .ImageDownloader__images {
   display: flex;
   flex-direction: row-reverse;
@@ -89,8 +154,19 @@
     justify-content: stretch;
   }
 
-  .ImageUploader__actions > button {
+  .ImageUploader__actions > button,
+  .ImageUploader__download {
     flex: 1 1 140px;
+  }
+
+  .ImageUploader__download,
+  .ImageUploader__download-main,
+  .ImageUploader__download-arrow {
+    width: 100%;
+  }
+
+  .ImageUploader__download-main {
+    flex: 1 1 auto;
   }
 }
 

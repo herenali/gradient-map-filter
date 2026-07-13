@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import ImageWithSvgFilter from "./ImageWithSvgFilter";
 import defaultImageSrc from '../assets/images/jelena-mirkovic-ibiL1ypRmNI-unsplash.jpg';
 import GradientInfoContext from "../context/GradientInfoContext";
@@ -11,6 +11,10 @@ import circleHalfStrokeIcon from '../assets/icons/circle-half-stroke.svg';
 import circleOverlapIcon from '../assets/icons/circle-overlap.svg';
 
 const desktopModeQuery = '(min-width: 768px)';
+const downloadFormats = {
+  svg: 'SVG',
+  png: 'PNG',
+};
 
 function getInitialDisplayMode() {
   if (typeof window === 'undefined') {
@@ -24,6 +28,9 @@ function ImageUploader() {
   const [file, setFile] = useState();
   const [displayMode, setDisplayMode] = useState(getInitialDisplayMode);
   const [showFilter, setShowFilter] = useState(true);
+  const [downloadFormat, setDownloadFormat] = useState('png');
+  const [isDownloadMenuOpen, setIsDownloadMenuOpen] = useState(false);
+  const downloadMenuRef = useRef(null);
   const { gradientInfo, setGradientInfo } = useContext(GradientInfoContext);
   const imageSrc = file ? file : defaultImageSrc;
 
@@ -43,6 +50,20 @@ function ImageUploader() {
     }
     loadImage();
   }, [setGradientInfo]);
+
+  useEffect(() => {
+    function handleDocumentClick(event) {
+      if (downloadMenuRef.current && !downloadMenuRef.current.contains(event.target)) {
+        setIsDownloadMenuOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleDocumentClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleDocumentClick);
+    };
+  }, []);
 
   async function handleChange(e) {
     const selectedFile = e.target.files && e.target.files[0];
@@ -73,7 +94,7 @@ function ImageUploader() {
     setShowFilter((currentVisibility) => !currentVisibility);
   }
 
-  async function downloadSvg() {
+  function getGradientMarkup() {
     const { gradient, opacity, blendMode } = gradientInfo;
     const gradientMarkup = gradient
       .map((color) => {
@@ -90,6 +111,11 @@ function ImageUploader() {
     const { redTableValues, greenTableValues, blueTableValues, alphaTableValues } =
       calcSVGComponentTransferFilter(gradientMarkup, opacity);
 
+    return { blendMode, redTableValues, greenTableValues, blueTableValues, alphaTableValues };
+  }
+
+  async function createSvgMarkup() {
+    const { blendMode, redTableValues, greenTableValues, blueTableValues, alphaTableValues } = getGradientMarkup();
     const imageBlob = await fetch(imageSrc).then((response) => response.blob());
 
     const imageDataUrl = await new Promise((resolve, reject) => {
@@ -99,7 +125,7 @@ function ImageUploader() {
       reader.readAsDataURL(imageBlob);
     });
 
-    const svgMarkup = `
+    return `
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 1600">
         <defs>
           <filter id="filter-0" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -116,6 +142,10 @@ function ImageUploader() {
         <image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" href="${imageDataUrl}" filter="url(#filter-0)" />
       </svg>
     `.trim();
+  }
+
+  async function downloadAsSvg() {
+    const svgMarkup = await createSvgMarkup();
 
     const svgBlob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' });
     const downloadUrl = URL.createObjectURL(svgBlob);
@@ -127,6 +157,67 @@ function ImageUploader() {
     downloadLink.click();
     document.body.removeChild(downloadLink);
     URL.revokeObjectURL(downloadUrl);
+  }
+
+  async function downloadAsPng() {
+    const svgMarkup = await createSvgMarkup();
+    const svgBlob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' });
+    const svgUrl = URL.createObjectURL(svgBlob);
+
+    try {
+      const image = new Image();
+      image.decoding = 'async';
+      image.src = svgUrl;
+
+      await new Promise((resolve, reject) => {
+        image.onload = resolve;
+        image.onerror = reject;
+      });
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 1600;
+      canvas.height = 1600;
+
+      const context = canvas.getContext('2d');
+
+      if (!context) {
+        throw new Error('Could not create canvas context');
+      }
+
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      const pngBlob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+
+      if (!pngBlob) {
+        throw new Error('Could not create PNG blob');
+      }
+
+      const downloadUrl = URL.createObjectURL(pngBlob);
+      const downloadLink = document.createElement('a');
+
+      downloadLink.href = downloadUrl;
+      downloadLink.download = 'gradient-map.png';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      URL.revokeObjectURL(downloadUrl);
+    } finally {
+      URL.revokeObjectURL(svgUrl);
+    }
+  }
+
+  async function downloadSelectedFormat() {
+    if (downloadFormat === 'png') {
+      await downloadAsPng();
+      return;
+    }
+
+    await downloadAsSvg();
+  }
+
+  function chooseDownloadFormat(format) {
+    setDownloadFormat(format);
+    setIsDownloadMenuOpen(false);
   }
 
  
@@ -144,7 +235,34 @@ function ImageUploader() {
           <button type="button" onClick={toggleDisplayMode} className="icon-button" title={displayMode === 'compare' ? 'Show filtered only' : 'Show comparison'}>
             <img src={displayMode === 'compare' ? circleHalfStrokeIcon : circleOverlapIcon} alt={displayMode === 'compare' ? 'Show filtered only' : 'Show comparison'} />
           </button>
-          <button type="button" onClick={downloadSvg}>Download SVG</button>
+          <div className="ImageUploader__download" ref={downloadMenuRef}>
+            <button type="button" onClick={downloadSelectedFormat} className="ImageUploader__download-main"
+              title={`Download as ${downloadFormats[downloadFormat]}`}>
+              Download {downloadFormats[downloadFormat]}
+            </button>
+            <button
+              type="button"
+              className="ImageUploader__download-arrow"
+              onClick={() => setIsDownloadMenuOpen((currentValue) => !currentValue)}
+              aria-haspopup="menu"
+              aria-expanded={isDownloadMenuOpen}
+              title="Choose download format"
+            >
+              ▼
+            </button>
+            {isDownloadMenuOpen ? (
+              <div className="ImageUploader__download-menu" role="menu">
+                <button type="button" role="menuitem" onClick={() => chooseDownloadFormat('png')}
+                  title="Download as PNG">
+                  .png
+                </button>
+                <button type="button" role="menuitem" onClick={() => chooseDownloadFormat('svg')}
+                  title="Download as SVG">
+                  .svg
+                </button>
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
 
