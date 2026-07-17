@@ -65,6 +65,14 @@ function ImageUploader() {
     };
   }, []);
 
+  useEffect(() => {
+    const icons = [eyeIcon, eyeCrossedIcon, circleHalfStrokeIcon, circleOverlapIcon];
+    icons.forEach(icon => {
+      const img = new Image();
+      img.src = icon;
+    });
+  }, []);
+
   async function handleChange(e) {
     const selectedFile = e.target.files && e.target.files[0];
 
