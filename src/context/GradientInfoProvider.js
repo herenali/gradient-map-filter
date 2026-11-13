@@ -7,7 +7,8 @@ import { saveGradientToDB, loadGradientFromDB } from '../utils/indexedDB';
 const GradientInfoProvider = ({ children }) => {
 	const [gradientInfo, setGradientInfo] = useState({
 		gradient: blackAndWhiteGradient,
-		opacity: 1,
+		// opacity: 1,
+		opacity: 0.3,
 		newImageSrc: defaultImageSrc,
 		blendMode: "normal"
 	});
