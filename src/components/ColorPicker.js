@@ -97,7 +97,7 @@ function ColorPicker(props) {
       },
       swatch: {
         padding: '5px',
-        background: '#eee',
+        // background: '#eee',
         borderRadius: '1px',
         boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
         display: 'inline-block',
