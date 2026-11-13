@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import GradientInfoContext from './GradientInfoContext';
-import { blackAndWhiteGradient } from '../constants/defaultGradients';
+import { blackAndWhiteGradient, u2 } from '../constants/defaultGradients';
 import defaultImageSrc from '../assets/images/jelena-mirkovic-ibiL1ypRmNI-unsplash.jpg';
 import { saveGradientToDB, loadGradientFromDB } from '../utils/indexedDB';
 
 const GradientInfoProvider = ({ children }) => {
 	const [gradientInfo, setGradientInfo] = useState({
-		gradient: blackAndWhiteGradient,
+		gradient: u2,
 		// opacity: 1,
 		opacity: 0.3,
 		newImageSrc: defaultImageSrc,

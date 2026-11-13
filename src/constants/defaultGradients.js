@@ -92,4 +92,4 @@ const z2 = [
 const gradients = [blackAndWhiteGradient, u2, v2, w2, y2, z2];
 
 export default gradients;
-export { blackAndWhiteGradient };
+export { blackAndWhiteGradient, u2 };
