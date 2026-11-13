@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Bukhari Script';
+    src: url('BukhariScript-Regular.woff2') format('woff2'),
+        url('BukhariScript-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+

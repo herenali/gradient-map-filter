@@ -237,11 +237,11 @@ function ImageUploader() {
         <div className="ImageUploader__actions">
           {displayMode === 'filtered' ? (
             <button type="button" onClick={toggleFilterVisibility} className="icon-button" title={showFilter ? 'Hide filter' : 'Show filter'}>
-              <img src={showFilter ? eyeCrossedIcon : eyeIcon} alt={showFilter ? 'Hide filter' : 'Show filter'} />
+              <img className="svg-color-dark-green" src={showFilter ? eyeCrossedIcon : eyeIcon} alt={showFilter ? 'Hide filter' : 'Show filter'} />
             </button>
           ) : null}
           <button type="button" onClick={toggleDisplayMode} className="icon-button" title={displayMode === 'compare' ? 'Show filtered only' : 'Show comparison'}>
-            <img src={displayMode === 'compare' ? circleHalfStrokeIcon : circleOverlapIcon} alt={displayMode === 'compare' ? 'Show filtered only' : 'Show comparison'} />
+            <img className="svg-color-dark-green" src={displayMode === 'compare' ? circleHalfStrokeIcon : circleOverlapIcon} alt={displayMode === 'compare' ? 'Show filtered only' : 'Show comparison'} />
           </button>
           <div className="ImageUploader__download" ref={downloadMenuRef}>
             <button type="button" onClick={downloadSelectedFormat} className="ImageUploader__download-main"
